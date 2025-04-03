@@ -1,10 +1,10 @@
 import React from "react";
-import Flowchart from "./componets/FlowChart";
+import FlowBuilder from "./componets/FlowChart";
 
 function App() {
   return (
     <div>
-      <Flowchart />
+      <FlowBuilder />
     </div>
   );
 }

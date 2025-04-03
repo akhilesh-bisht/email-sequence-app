@@ -3,8 +3,9 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
-import userRoute from "./routes/userRoute.js";
 import connectDB from "./config/db.js";
+import userRoute from "./routes/userRoute.js";
+import mailRoute from "./routes/mailRoute.js";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -24,7 +25,7 @@ app.use(cors()); // Enables Cross-Origin Resource Sharing (CORS)
 
 // Define API routes
 app.use("/api/users", userRoute); // Routes for user authentication and management
-
+app.use("/sendmail", mailRoute);
 // Root route to check if the server is running
 app.get("/", (req, res) => {
   res.json("server started");

@@ -1,5 +1,5 @@
 import Lead from "../models/Lead.js";
-import Sequence from "../models/sequence.js";
+import Sequence from "../models/Sequence.js";
 import { scheduleNextStep } from "../services/emailService.js";
 
 // ✅ Add Lead to Sequence

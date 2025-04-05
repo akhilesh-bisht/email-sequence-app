@@ -40,22 +40,23 @@ import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
 import Agenda from "agenda";
-import connectDB from "./config/db.js";
 
+import connectDB from "./config/db.js";
 import sequenceRoutes from "./routes/sequence.js";
 import leadRoutes from "./routes/Leads.js";
+import defineJobs from "./job/agenda.js"; // ✅ Add this line (correct path to your job file)
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Database Connection
+// ✅ Connect to MongoDB
 connectDB();
 
 // ✅ Agenda Setup
 const agenda = new Agenda({
   db: { address: process.env.MONGODB_URI, collection: "jobs" },
-  processEvery: "1 minute",
+  processEvery: process.env.AGENDA_PROCESS_EVERY || "1 minute",
 });
 app.locals.agenda = agenda;
 
@@ -63,13 +64,16 @@ app.locals.agenda = agenda;
 app.use(cors());
 app.use(bodyParser.json());
 
-// ✅ Routes
+// ✅ API Routes
 app.use("/api/sequences", sequenceRoutes);
 app.use("/api/leads", leadRoutes);
 
-// ✅ Start Server & Agenda Jobs
-(async () => {
-  await agenda.start();
-  console.log(`🚀 Server running on port ${PORT}`);
-  app.listen(PORT);
-})();
+// ✅ Start Agenda & Server
+agenda.on("ready", async () => {
+  defineJobs(agenda); // ✅ Register your Agenda jobs
+  await agenda.start(); // ✅ Start processing
+  console.log("✅ Agenda is connected and ready!");
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+});

@@ -4,7 +4,7 @@ const SequenceSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   nodes: { type: Array, required: true },
   edges: { type: Array, required: true },
-  active: { type: Boolean, default: false },
+  active: { type: Boolean, default: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

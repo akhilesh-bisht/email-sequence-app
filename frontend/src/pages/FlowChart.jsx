@@ -13,7 +13,8 @@ import Sidebar from "../componets/Sidebar";
 import LeadSourceNode from "../componets/nodes/LeadSourceNode";
 import EmailNode from "../componets/nodes/EmailNode";
 import WaitNode from "../componets/nodes/WaitNode";
-import { saveSequence, executeSequence, createLead } from "../api/api";
+import { saveSequence, executeSequence, createLead, logout } from "../api/api";
+import { useNavigate } from "react-router-dom";
 
 // Define custom node
 const nodeTypes = {
@@ -24,6 +25,7 @@ const nodeTypes = {
 
 const FlowBuilder = () => {
   const reactFlowWrapper = useRef(null);
+  const navigate = useNavigate();
 
   // State for managing nodes and edges in the flow
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -53,6 +55,17 @@ const FlowBuilder = () => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
   }, []);
+
+  //    logout handle
+  const handleLogout = async () => {
+    try {
+      await logout(); // optional if API supports it
+    } catch (err) {
+      console.error("Server logout failed, proceeding to clear local");
+    }
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   // When a new node is dropped onto the canvas
   const onDrop = useCallback(
@@ -214,6 +227,13 @@ const FlowBuilder = () => {
             </button>
           </div>
 
+          {/*   log out */}
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition"
+          >
+            Logout
+          </button>
           {/* Show status message */}
           {savedMessage && (
             <div

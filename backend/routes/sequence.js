@@ -1,5 +1,4 @@
 import express from "express";
-import Sequence from "../models/Sequence.js";
 import {
   saveSequence,
   executeSequence,

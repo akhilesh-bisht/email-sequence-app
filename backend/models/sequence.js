@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Define schema for sequences
 const SequenceSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   nodes: { type: Array, required: true },
@@ -9,5 +10,7 @@ const SequenceSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-const Sequence = mongoose.model("Sequence", SequenceSchema);
+const Sequence =
+  mongoose.models.Sequence || mongoose.model("Sequence", SequenceSchema);
+
 export default Sequence;

@@ -23,7 +23,7 @@ export const registerUser = async (req, res) => {
         .json({ error: "User already exists. Please log in." });
     }
 
-    // Validate password strength
+    // Validate password
     if (password.length < 6) {
       return res
         .status(400)
@@ -33,7 +33,6 @@ export const registerUser = async (req, res) => {
     // Create new user
     const newUser = await User.create({ email: normalizedEmail, password });
 
-    // Prepare response
     res.status(201).json({
       message: "User registered successfully",
       user: { _id: newUser._id, email: newUser.email },

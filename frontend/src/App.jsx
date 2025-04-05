@@ -1,11 +1,17 @@
-import React from "react";
-import FlowBuilder from "./componets/FlowChart";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Sign";
+import FlowBuilder from "./pages/FlowChart";
 
 function App() {
   return (
-    <div>
-      <FlowBuilder />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/flow" element={<FlowBuilder />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -24,7 +24,7 @@ const defineJobs = (agenda) => {
       await lead.save();
       console.log("✅ Lead updated to next step:", nextNodeId);
 
-      // ✅ Call the function to handle next step
+      //  Call the function to handle next step
       await scheduleNextStep(agenda, lead, sequence);
 
       done();

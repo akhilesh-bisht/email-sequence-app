@@ -1,10 +1,9 @@
-// src/components/Sidebar.jsx
 import React from "react";
 
 const Sidebar = () => {
-  const onDragStart = (event, nodeType) => {
-    event.dataTransfer.setData("application/reactflow", nodeType);
-    event.dataTransfer.effectAllowed = "move";
+  const onDragStart = (e, nodeType) => {
+    e.dataTransfer.setData("application/reactflow", nodeType);
+    e.dataTransfer.effectAllowed = "move";
   };
 
   return (

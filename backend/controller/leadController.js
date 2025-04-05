@@ -2,7 +2,7 @@ import Lead from "../models/Lead.js";
 import Sequence from "../models/Sequence.js";
 import { scheduleNextStep } from "../services/emailService.js";
 
-// ✅ Add Lead to Sequence
+//  Add Lead to Sequence
 export const addLead = async (req, res) => {
   try {
     const { email, name, sequenceId } = req.body;

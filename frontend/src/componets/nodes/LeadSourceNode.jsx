@@ -1,7 +1,7 @@
 import React from "react";
 import { Handle } from "reactflow";
 
-const LeadSourceNode = ({ id, data }) => {
+const LeadSourceNode = () => {
   return (
     <div className="p-3 rounded-lg shadow bg-white border-2 border-blue-500 w-64">
       {/* Header with Icon */}

@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import { Handle } from "reactflow";
 
 const EmailNode = ({ id, data }) => {
+  // To show/hide the input fields
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // Handle input change and call parent's onChange function
   const handleChange = (e) => {
-    data.onChange(id, { [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    data.onChange(id, { [name]: value });
   };
 
   return (
-    <div className="p-3 rounded-lg shadow bg-white border-2 border-green-500 w-64">
+    <div className="p-3 w-64 bg-white border-2 border-green-500 rounded-lg shadow">
+      {/* Top connection handle */}
       <Handle
         type="target"
         position="top"
@@ -21,9 +25,11 @@ const EmailNode = ({ id, data }) => {
         }}
       />
 
+      {/* Header with icon and expand button */}
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white mr-2">
+          <div className="w-8 h-8 bg-green-500 text-white flex items-center justify-center rounded-full mr-2">
+            {/* Email icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4"
@@ -41,6 +47,8 @@ const EmailNode = ({ id, data }) => {
           </div>
           <div className="font-medium">Email</div>
         </div>
+
+        {/* Expand/collapse button */}
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="text-gray-500 hover:text-gray-700"
@@ -49,9 +57,10 @@ const EmailNode = ({ id, data }) => {
         </button>
       </div>
 
+      {/* Input fields when expanded */}
       {isExpanded ? (
         <div className="mt-3 space-y-2">
-          {/* New Input for Recipient's Email */}
+          {/* Recipient Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Recipient Email
@@ -61,12 +70,12 @@ const EmailNode = ({ id, data }) => {
               name="recipient"
               value={data.recipient || ""}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 text-sm border"
+              className="mt-1 p-2 w-full text-sm border rounded-md border-gray-300 shadow-sm"
               placeholder="Enter recipient email"
             />
           </div>
 
-          {/* Subject Field */}
+          {/* Subject */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Subject
@@ -76,12 +85,12 @@ const EmailNode = ({ id, data }) => {
               name="subject"
               value={data.subject || ""}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 text-sm border"
+              className="mt-1 p-2 w-full text-sm border rounded-md border-gray-300 shadow-sm"
               placeholder="Email subject"
             />
           </div>
 
-          {/* Email Body Field */}
+          {/* Email Body */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email Body
@@ -91,12 +100,13 @@ const EmailNode = ({ id, data }) => {
               value={data.body || ""}
               onChange={handleChange}
               rows="4"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 text-sm border"
+              className="mt-1 p-2 w-full text-sm border rounded-md border-gray-300 shadow-sm"
               placeholder="Email content..."
-            ></textarea>
+            />
           </div>
         </div>
       ) : (
+        // Preview subject when collapsed
         <div className="mt-2 text-sm text-gray-600 truncate">
           {data.subject
             ? `Subject: ${data.subject}`
@@ -104,6 +114,7 @@ const EmailNode = ({ id, data }) => {
         </div>
       )}
 
+      {/* Bottom connection handle */}
       <Handle
         type="source"
         position="bottom"

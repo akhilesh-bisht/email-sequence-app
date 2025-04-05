@@ -15,7 +15,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, "Password is required"],
-      minlength: 6, // Ensuring password has a minimum length
+      minlength: 6,
     },
   },
   { timestamps: true }
@@ -29,7 +29,7 @@ userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, 10);
     next();
   } catch (error) {
-    next(error); // Pass error to Mongoose error handler
+    next(error);
   }
 });
 

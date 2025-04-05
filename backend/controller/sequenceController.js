@@ -1,4 +1,4 @@
-import Sequence from "../models/Sequence.js";
+import Sequence from "../models/sequence.js";
 import Lead from "../models/Lead.js";
 import { scheduleNextStep } from "../services/emailService.js";
 

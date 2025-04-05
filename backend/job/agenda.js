@@ -1,6 +1,6 @@
 import { scheduleNextStep } from "../services/emailService.js";
 import Lead from "../models/Lead.js";
-import Sequence from "../models/Sequence.js";
+import Sequence from "../models/sequence.js";
 
 const defineJobs = (agenda) => {
   agenda.define("process sequence step", async (job, done) => {

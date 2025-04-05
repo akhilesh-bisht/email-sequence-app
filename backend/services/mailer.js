@@ -3,18 +3,18 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// ✅ Setup Nodemailer Transporter
+// Setup Nodemailer Transporter
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: process.env.EMAIL_PORT,
-  secure: false, // true for 465, false for other ports
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
   },
 });
 
-// ✅ Send Email Function
+// Send Email Function
 export const sendEmail = async (to, subject, text) => {
   try {
     await transporter.sendMail({
@@ -23,8 +23,8 @@ export const sendEmail = async (to, subject, text) => {
       subject,
       text,
     });
-    console.log(`✅ Email sent to ${to}`);
+    console.log(` Email sent to ${to}`);
   } catch (error) {
-    console.error("❌ Email error:", error);
+    console.error(" Email error:", error);
   }
 };

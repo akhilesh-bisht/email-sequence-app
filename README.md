@@ -1,4 +1,4 @@
-     # 📧 Visual Email Sequence Builder
+#     # 📧 Visual Email Sequence Builder
 
 A beginner-friendly drag-and-drop tool to create and execute cold email campaigns with scheduled delays. Built using React, Node.js, MongoDB, and supports JWT authentication.
 
